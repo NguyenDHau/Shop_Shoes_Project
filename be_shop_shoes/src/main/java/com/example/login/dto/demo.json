@@ -1,0 +1,22 @@
+[
+  {
+    "id" : 1,
+    "name" : "Giay nam",
+    "parentId" : 2,
+    "children" :
+                [
+                  {
+                    "id" : 2,
+                    "name" : "Giay nam",
+                    "parentId" : 1,
+                    "children" : []
+                  },
+                  {
+                    "id" : 3,
+                    "name" : "Giay nu",
+                    "parentId" : 1,
+                    "children" : []
+                  }
+                ]
+  }
+]
