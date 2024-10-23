@@ -1,76 +1,132 @@
 package com.example.login.model.entity;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long id;
+//
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<CartItem> items = new ArrayList<>();
 
-    @Column(name = "order_name")
-    private String orderName;
+    private String status;
 
-    @Column(name = "total_price")
-    private double totalPrice;
+    private String paymentMethod;
 
-    @Column(name = "date_order")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateOrder;
+    private String shippingAddress;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<OrderDetail> orderDetails;
+    private LocalDateTime orderDate;
 
-    public Order(Long orderId, String orderName, double totalPrice, Date dateOrder, Set<OrderDetail> orderDetails) {
-        this.orderId = orderId;
-        this.orderName = orderName;
-        this.totalPrice = totalPrice;
-        this.dateOrder = dateOrder;
-        this.orderDetails = orderDetails;
+    private String cusName;
+    private String cusPhone;
+    private String cusEmail;
+    private String orderNote;
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Payment payment;
+    private Double toTal;
+
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    // Getters and Setters
+
+    public Long getId() {
+        return id;
     }
 
-    public Order() {
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getOrderId() {
-        return orderId;
+//    public List<CartItem> getItems() {
+//        return items;
+//    }
+//
+//    public void setItems(List<CartItem> items) {
+//        this.items = items;
+//    }
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getOrderName() {
-        return orderName;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public String getShippingAddress() {
+        return shippingAddress;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
-    public Date getDateOrder() {
-        return dateOrder;
+    public LocalDateTime getOrderDate() {
+        return orderDate;
     }
 
-    public void setDateOrder(Date dateOrder) {
-        this.dateOrder = dateOrder;
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
     }
 
-    public Set<OrderDetail> getOrderDetails() {
-        return orderDetails;
+    public String getCusName() {
+        return cusName;
     }
 
-    public void setOrderDetails(Set<OrderDetail> orderDetails) {
-        this.orderDetails = orderDetails;
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
+
+    public String getCusPhone() {
+        return cusPhone;
+    }
+
+    public void setCusPhone(String cusPhone) {
+        this.cusPhone = cusPhone;
+    }
+
+    public String getCusEmail() {
+        return cusEmail;
+    }
+
+    public void setCusEmail(String cusEmail) {
+        this.cusEmail = cusEmail;
+    }
+
+    public String getOrderNote() {
+        return orderNote;
+    }
+
+    public void setOrderNote(String orderNote) {
+        this.orderNote = orderNote;
+    }
+
+    public Double getToTal() {
+        return toTal;
+    }
+
+    public void setToTal(Double toTal) {
+        this.toTal = toTal;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 }

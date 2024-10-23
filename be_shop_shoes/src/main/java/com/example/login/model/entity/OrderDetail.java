@@ -8,45 +8,48 @@ public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderDetailId; // Khóa chính
+    private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order order; // Khóa ngoại liên kết với đơn hàng
+    @Column(name = "order_id", nullable = false)
+    private Long orderId;
+
+    @Column(name = "cus_id", nullable = false)
+    private Long cusId;
 
     @Column(name = "product_id", nullable = false)
-    private Long productId; // Khóa ngoại liên kết với sản phẩm
+    private Long productId;
 
-    @Column(name = "product_name")
-    private String productName; // Tên sản phẩm
+    @Column(name = "product_name", nullable = false)
+    private String productName;
 
-    @Column(name = "quantity")
-    private int quantity; // Số lượng sản phẩm
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
 
-    @Column(name = "price")
-    private double price; // Giá sản phẩm
+    @Column(name = "price", nullable = false)
+    private double price;
 
-    @Column(name = "total_product")
-    private double total; // Tổng tiền, không lưu vào DB
-
-    // Constructor, getters, and setters
-
-    public OrderDetail() {}
-
-    public Long getOrderDetailId() {
-        return orderDetailId;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrderDetailId(Long orderDetailId) {
-        this.orderDetailId = orderDetailId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Order getOrder() {
-        return order;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Long getCusId() {
+        return cusId;
+    }
+
+    public void setCusId(Long cusId) {
+        this.cusId = cusId;
     }
 
     public Long getProductId() {
@@ -71,7 +74,6 @@ public class OrderDetail {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        calculateTotal(); // Tính toán tổng khi số lượng thay đổi
     }
 
     public double getPrice() {
@@ -80,14 +82,5 @@ public class OrderDetail {
 
     public void setPrice(double price) {
         this.price = price;
-        calculateTotal(); // Tính toán tổng khi giá thay đổi
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    private void calculateTotal() {
-        this.total = this.quantity * this.price; // Tính tổng
     }
 }

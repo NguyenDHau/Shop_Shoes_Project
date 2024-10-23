@@ -122,5 +122,11 @@ public class AuthController {
 
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<MessageResponse> logout() {
+        // Không cần thêm logic gì vì JWT không có trạng thái
+        return ResponseEntity.ok(new MessageResponse("User logged out successfully"));
+    }
+
 
 }
