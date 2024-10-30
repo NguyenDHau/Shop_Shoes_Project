@@ -1,5 +1,7 @@
 package com.example.login.controller;
 
+import com.example.login.dto.ProductDetailResponseDto;
+import com.example.login.dto.ProductResponse;
 import com.example.login.model.entity.Product;
 import com.example.login.model.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,12 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<List<ProductResponse>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+    public ResponseEntity<ProductDetailResponseDto> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 

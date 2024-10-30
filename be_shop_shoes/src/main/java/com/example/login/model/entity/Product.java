@@ -8,18 +8,15 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String productCode;
     private String name; // Thêm thuộc tính tên sản phẩm
-    private double price; // Thêm thuộc tính giá sản phẩm
-
     @Column(name = "category_id", nullable = false) // Khóa ngoại
     private Long categoryId;
-
-    private String size; // Kích thước sản phẩm
-
-    @Column(name = "product_quantity") // Tên cột cho số lượng sản phẩm
-    private int quantity; // Số lượng sản phẩm
+    private String description;
+    private Double price;
 
     // Getter và Setter cho id
+
     public Long getId() {
         return id;
     }
@@ -28,21 +25,20 @@ public class Product {
         this.id = id;
     }
 
-    // Getter và Setter cho các thuộc tính khác
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public Long getCategoryId() {
@@ -53,19 +49,19 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public String getSize() {
-        return size;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
