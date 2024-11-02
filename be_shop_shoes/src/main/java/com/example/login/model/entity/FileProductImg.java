@@ -16,6 +16,9 @@ public class FileProductImg {
     @Column(name="color_id")
     private Long color_id;
 
+    @Column(name="product_color_id")
+    private Long productColorId;
+
 
     public Long getId() {
         return id;
@@ -55,5 +58,13 @@ public class FileProductImg {
 
     public void setColor_id(Long color_id) {
         this.color_id = color_id;
+    }
+
+    public Long getProductColorId() {
+        return productColorId;
+    }
+
+    public void setProductColorId(Long productColorId) {
+        this.productColorId = productColorId;
     }
 }

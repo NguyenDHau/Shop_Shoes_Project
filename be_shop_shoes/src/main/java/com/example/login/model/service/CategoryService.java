@@ -46,6 +46,15 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
+
+    public Long getIdByCategoryName(String name) {
+        Optional<Category> category = categoryRepository.findByName(name);
+        if (category.isPresent()) {
+            return category.get().getId();
+        } else {
+            throw new RuntimeException("Category not found with name: " + name);
+        }
+    }
 }
 
 

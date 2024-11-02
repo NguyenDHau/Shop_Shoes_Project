@@ -7,10 +7,11 @@ import java.util.List;
 
 public class ProductDetailResponseDto {
     private Long productId;
-
     private String categoryName;
-
+    private String name;
     private Double price;
+    private String description;
+    private String productCode;
 
     private List<ProductColorDao> listColor;
 
@@ -54,5 +55,29 @@ public class ProductDetailResponseDto {
 
     public void setListSize(List<ProductSizeDao> listSize) {
         this.listSize = listSize;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 }

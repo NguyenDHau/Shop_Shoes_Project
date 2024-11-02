@@ -1,22 +1,38 @@
-[
-  {
-    "id" : 1,
-    "name" : "Giay nam",
-    "parentId" : 2,
-    "children" :
-                [
-                  {
-                    "id" : 2,
-                    "name" : "Giay nam",
-                    "parentId" : 1,
-                    "children" : []
-                  },
-                  {
-                    "id" : 3,
-                    "name" : "Giay nu",
-                    "parentId" : 1,
-                    "children" : []
-                  }
-                ]
-  }
-]
+//-- Create
+//
+//-- nhung tabnle can luu:
+//-- 1. product (luu thong tin chung);
+//-- 2. product_color (Luu thong tin san pham do co may mau);
+//-- 3. file_product_img (Luu file img )
+//-- 4. inventory (luu size va quntity)
+
+
+{
+  'categoryId': 1,
+  'name': 'giay nam',
+  'description': 'mo ta',
+  'price': 2000,
+  'productCode': 'sp1',
+  'productDetail': [
+    {
+      'colorId': 1,
+      'fileUrl': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAI99EPdcbowKgeZuTVR9uuQEc1GTP-EpU8tZkIvzeWeTO1dT9SivJBwtM2gsil0cK6_E&usqp=CAU'
+    },
+    {
+      'colorId': 2,
+      'fileUrl': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAI99EPdcbowKgeZuTVR9uuQEc1GTP-EpU8tZkIvzeWeTO1dT9SivJBwtM2gsil0cK6_E&usqp=CAU'
+    }
+  ],
+  'invetory': [
+    {
+      'sizeId': 1,
+      'colorId': 1,
+      'quantity': 5
+    },
+    {
+      'sizeId': 2,
+      'colorId': 1,
+      'quantity': 5
+    }
+  ]
+}

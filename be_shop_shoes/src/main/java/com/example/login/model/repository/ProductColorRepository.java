@@ -15,7 +15,7 @@ public interface ProductColorRepository extends JpaRepository<ProductColor, Long
             "\t\tcl.color_name as 'colorName',\n" +
             "        cl.id as 'id'\n" +
             "from product_color pc\n" +
-            "join file_product_img fpi on fpi.color_id = pc.color_id and fpi.product_id = pc.product_id\n" +
+            "join file_product_img fpi on fpi.product_color_id = pc.id\n" +
             "join color cl on cl.id = pc.color_id\n" +
             "where pc.product_id = :productId\n" +
             "order by fpi.order", nativeQuery = true)

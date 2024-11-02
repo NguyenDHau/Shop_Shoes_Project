@@ -1,6 +1,7 @@
 package com.example.login.controller;
 
 import com.example.login.dto.ProductDetailResponseDto;
+import com.example.login.dto.ProductDto;
 import com.example.login.dto.ProductResponse;
 import com.example.login.model.entity.Product;
 import com.example.login.model.service.ProductService;
@@ -18,8 +19,9 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        return ResponseEntity.ok(productService.createProduct(product));
+    public ResponseEntity<?> createProduct(@RequestBody ProductDto productDto) {
+        productService.createProduct(productDto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
