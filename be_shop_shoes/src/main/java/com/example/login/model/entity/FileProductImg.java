@@ -19,6 +19,12 @@ public class FileProductImg {
     @Column(name="product_color_id")
     private Long productColorId;
 
+    @Column(name="public_id")
+    private String publicId;
+
+    @Column(name="signature")
+    private String signature;
+
 
     public Long getId() {
         return id;
@@ -66,5 +72,21 @@ public class FileProductImg {
 
     public void setProductColorId(Long productColorId) {
         this.productColorId = productColorId;
+    }
+
+    public String getPublicId() {
+        return publicId;
+    }
+
+    public void setPublicId(String publicId) {
+        this.publicId = publicId;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

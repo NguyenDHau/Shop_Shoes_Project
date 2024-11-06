@@ -4,4 +4,8 @@ public interface ProductSizeDao {
     Long getId();
 
     String getSizeName();
+
+    Integer getQuantity();
+
+    Long getColorId();
 }

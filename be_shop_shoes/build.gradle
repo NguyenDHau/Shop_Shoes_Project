@@ -23,6 +23,8 @@ dependencies {
     runtimeOnly 'mysql:mysql-connector-java'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'com.cloudinary:cloudinary-http44:1.33.0'
+
 }
 
 test {

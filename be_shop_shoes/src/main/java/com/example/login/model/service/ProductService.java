@@ -62,6 +62,8 @@ public class ProductService {
             fileProductImg.setProductColorId(productColor.getId());
             fileProductImg.setFileUrl(item.getFileUrl());
             fileProductImg.setOrder(Long.valueOf(order));
+            fileProductImg.setPublicId(item.getPublicId());
+            fileProductImg.setSignature(item.getSignature());
             fileUrlProduct.save(fileProductImg);
             order++;
         }

@@ -13,7 +13,9 @@ import java.util.List;
 public interface SizeRepository extends JpaRepository<Size, Long> {
     @Query(value = "SELECT DISTINCT s.id AS 'id',\n" +
             "                s.size_name AS 'sizeName',\n" +
-            "                s.order\n" +
+            "                s.order,\n" +
+            "                i.quantity,\n" +
+            "                i.color_id AS 'colorId'\n" +
             "FROM size s\n" +
             "JOIN inventory i ON s.id = i.size_id\n" +
             "WHERE i.product_id = :productId\n" +
