@@ -1,54 +1,62 @@
-//package com.example.login.controller;
-//
-//import com.example.login.dto.CartRequest;
-//import com.example.login.model.entity.Cart;
-//import com.example.login.model.entity.Inventory;
-//import com.example.login.model.entity.User;
-//import com.example.login.model.repository.InventoryRepository;
-//import com.example.login.model.service.CartService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.time.Instant;
-//import java.util.List;
-//
-//@RestController
-//@RequestMapping("/api/cart")
-//@CrossOrigin(origins = "*")
-//public class CartController {
-//
-//    @Autowired
-//    private CartService cartService;
-//    @Autowired
-//    private InventoryRepository inventoryRepository;
-//
-//    @GetMapping("/user/{userId}")
-//    public List<Cart> getCartByUserId(@PathVariable Long userId) {
-//        return cartService.getCartByUserId(userId);
-//    }
-//
-//    @PostMapping("/add")
-//    public Cart addToCart(@RequestBody CartRequest cartRequest) {
-////        // Lấy user từ cơ sở dữ liệu (hoặc dùng phương thức khác để đảm bảo user tồn tại)
-////        User user = new User();
-////        user.setId(cartRequest.getUserId());
-////
-////        // Lấy Inventory từ cơ sở dữ liệu dựa trên productId
-////        Inventory inventory = inventoryRepository.findById(cartRequest.getProductId())
-////                .orElseThrow(() -> new RuntimeException("Không tìm thấy Inventory với ID: " + cartRequest.getProductId()));
-////
-////        // Tạo mới đối tượng Cart với dữ liệu từ CartRequest
-////        Cart newCart = new Cart();
-////        newCart.setUserId(cartRequest.getUserId());
-////        newCart.setProductId(cartRequest.getProductId());
-////        newCart.setQuantity(cartRequest.getQuantity());
-////        newCart.setTimeCreate(Instant.now());
-//        return cartService.createOrUpdateCart(cartRequest);
-//    }
-//
-//    @DeleteMapping("/user/{userId}")
-//    public String deleteCartByUserId(@PathVariable Long userId) {
-//        cartService.deleteCartByUserId(userId);
-//        return "Giỏ hàng của user với ID " + userId + " đã được xoá thành công.";
-//    }
-//}
+package com.example.login.controller;
+import com.example.login.dto.CartDetailDTO;
+import com.example.login.model.entity.Cart;
+import com.example.login.model.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/carts")
+@CrossOrigin(origins = "*")
+public class CartController {
+
+    @Autowired
+    private CartService cartService;
+
+    // Tạo mới một cart
+    @PostMapping
+    public Cart createOrUpdateCart(@RequestBody Cart cart) {
+        return cartService.createOrUpdateCart(cart);
+    }
+
+    // Lấy thông tin tất cả các cart
+    @GetMapping
+    public List<Cart> getAllCarts() {
+        return cartService.getAllCarts();
+    }
+
+    // Lấy thông tin một cart theo ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Cart> getCartById(@PathVariable Long id) {
+        Optional<Cart> cart = cartService.getCartById(id);
+        return cart.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    // Cập nhật một cart
+    @PutMapping("/{id}")
+    public ResponseEntity<Cart> updateCart(@PathVariable Long id, @RequestBody Cart cartDetails) {
+        try {
+            Cart updatedCart = cartService.updateCart(id, cartDetails);
+            return ResponseEntity.ok(updatedCart);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Xóa một cart
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCart(@PathVariable Long id) {
+        cartService.deleteCart(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/details/{userId}")
+    public ResponseEntity<List<CartDetailDTO>> getCartDetails(@PathVariable Long userId) {
+        List<CartDetailDTO> cartDetails = cartService.getCartDetailsByUserId(userId);
+        return ResponseEntity.ok(cartDetails);
+    }
+}
