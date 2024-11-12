@@ -1,5 +1,6 @@
 package com.example.login.model.service;
 
+import com.example.login.dto.OrderDTO;
 import com.example.login.model.entity.Cart;
 import com.example.login.model.entity.Order;
 import com.example.login.model.entity.Payment;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -30,7 +32,7 @@ public class OrderService {
 
 
     @Transactional
-    public Order createOrder(String paymentMethod, String shippingAddress, String cusName, String cusPhone, String cusEmail, String orderNote, Double toTal) {
+    public Order createOrder(String paymentMethod, String shippingAddress, String cusName, String cusPhone, String cusEmail, String orderNote, Long userId, Double toTal) {
 
         // Tạo đơn hàng
         Order order = new Order();
@@ -42,6 +44,7 @@ public class OrderService {
         order.setCusPhone(cusPhone);
         order.setCusEmail(cusEmail);
         order.setOrderNote(orderNote);
+        order.setUserId(userId);
         order.setToTal(toTal);
 
         // Lưu Order trước
@@ -65,5 +68,9 @@ public class OrderService {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
         order.setStatus(status);
         return orderRepository.save(order);
+    }
+
+    public List<Order> getOrdersByUserId(Long userId) {
+        return orderRepository.findByUserId(userId);
     }
 }

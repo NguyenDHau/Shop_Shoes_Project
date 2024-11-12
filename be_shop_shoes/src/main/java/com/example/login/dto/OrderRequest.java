@@ -7,6 +7,8 @@ public class OrderRequest {
     private String cusPhone;
     private String cusEmail;
     private String orderNote;
+
+    private Long userId;
     private Double toTal;
 
     // Getter và Setter
@@ -34,5 +36,13 @@ public class OrderRequest {
 
     public void setToTal(Double toTal) {
         this.toTal = toTal;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -11,8 +11,8 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="product_id")
-    private Long productId;
+    @Column(name="inventory_id")
+    private Long inventoryId;
 
     @Column(name="user_id")
     private Long userId;
@@ -23,6 +23,7 @@ public class Cart {
     private Instant timeCreate;
 
 
+
     public Long getId() {
         return id;
     }
@@ -31,12 +32,12 @@ public class Cart {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getInventoryId() {
+        return inventoryId;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setInventoryId(Long inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
     public Long getUserId() {
@@ -62,4 +63,5 @@ public class Cart {
     public void setTimeCreate(Instant timeCreate) {
         this.timeCreate = timeCreate;
     }
+
 }

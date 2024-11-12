@@ -14,6 +14,7 @@ public class Product {
     private Long categoryId;
     private String description;
     private Double price;
+    private Long branchId;
 
     // Getter và Setter cho id
 
@@ -63,5 +64,13 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Long getBranchId() {
+        return branchId;
+    }
+
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 }

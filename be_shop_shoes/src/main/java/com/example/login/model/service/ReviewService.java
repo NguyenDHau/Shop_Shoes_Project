@@ -1,11 +1,15 @@
 package com.example.login.model.service;
 
+import com.example.login.dto.ProductRatingDto;
 import com.example.login.model.entity.Review;
 import com.example.login.model.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -59,6 +63,19 @@ public class ReviewService {
 
     public void deleteReview(Long id) {
         reviewRepository.deleteById(id);
+    }
+
+    public List<ProductRatingDto> getTop4ProductsByRating() {
+        List<Object[]> results = reviewRepository.findTop4ProductsByRating();
+
+        return results.stream().map(result -> new ProductRatingDto(
+                ((BigInteger) result[0]).longValue(),           // productId, chuyển từ BigInteger sang Long
+                ((Number) result[1]).intValue(),                // avgRating, dùng Number để hỗ trợ cả BigDecimal và Double
+                (String) result[2],                             // productName
+                (String) result[3],                             // fileUrl
+                ((Number) result[4]).doubleValue(),             // price, dùng Number để hỗ trợ cả BigDecimal và Double
+                ((BigInteger) result[5]).intValue()               // countReview, chuyển BigInteger thành Integer
+        )).collect(Collectors.toList());
     }
 }
 

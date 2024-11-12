@@ -63,11 +63,17 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
+        return ResponseEntity.ok(new JwtResponse(
+                jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                roles));
+                userDetails.getFirstName(),
+                userDetails.getLastName(),
+                userDetails.getPhoneNumber(),
+                userDetails.getAddress(),
+                roles
+        ));
     }
 
     @PostMapping(value = "/signup")
@@ -84,9 +90,15 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email already is use!"));
         }
 
-        User user = new User(signupRequest.getUsername(),
+        User user = new User(
+                signupRequest.getUsername(),
                 signupRequest.getEmail(),
-                encoder.encode(signupRequest.getPassword()));
+                encoder.encode(signupRequest.getPassword()),
+                signupRequest.getFirstName(),
+                signupRequest.getLastName(),
+                signupRequest.getPhoneNumber(),
+                signupRequest.getAddress()
+        );
 
         Set<String> strRoles = signupRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -128,5 +140,10 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User logged out successfully"));
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
+    }
 
 }

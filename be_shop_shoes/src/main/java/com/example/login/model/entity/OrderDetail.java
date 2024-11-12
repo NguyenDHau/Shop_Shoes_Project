@@ -13,20 +13,11 @@ public class OrderDetail {
     @Column(name = "order_id", nullable = false)
     private Long orderId;
 
-    @Column(name = "cus_id", nullable = false)
-    private Long cusId;
-
-    @Column(name = "product_id", nullable = false)
-    private Long productId;
-
-    @Column(name = "product_name", nullable = false)
-    private String productName;
+    @Column(name = "inventoryId", nullable = false)
+    private Long inventoryId;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
-
-    @Column(name = "price", nullable = false)
-    private double price;
 
     public Long getId() {
         return id;
@@ -44,30 +35,6 @@ public class OrderDetail {
         this.orderId = orderId;
     }
 
-    public Long getCusId() {
-        return cusId;
-    }
-
-    public void setCusId(Long cusId) {
-        this.cusId = cusId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -76,11 +43,11 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public Long getInventoryId() {
+        return inventoryId;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setInventoryId(Long inventoryId) {
+        this.inventoryId = inventoryId;
     }
 }
