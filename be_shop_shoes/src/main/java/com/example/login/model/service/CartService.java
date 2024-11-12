@@ -74,7 +74,8 @@ public class CartService {
                 (String) row[3],      // productName
                 (Double) row[4],      // price
                 (Integer) row[5],      // quantity
-                row[6] instanceof BigInteger ? ((BigInteger) row[6]).longValue() : (Long) row[6] // inventoryId
+                row[6] instanceof BigInteger ? ((BigInteger) row[6]).longValue() : (Long) row[6], // inventoryId
+                (String) row[7]
         )).collect(Collectors.toList());
     }
 }

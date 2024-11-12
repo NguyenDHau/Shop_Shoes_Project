@@ -25,14 +25,19 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
             "p.name as productName, " +
             "p.price as price, " +
             "c.quantity as quantity, " +
-            "i.id as inventoryId " + // Thêm khoảng trắng ở cuối dòng này
+            "i.id as inventoryId, " +
+            "MIN(fpi.file_url) as fileUrl " + // Lấy một URL duy nhất cho mỗi sản phẩm
             "FROM cart c " +
             "JOIN users u ON u.id = c.user_id " +
             "JOIN inventory i ON i.id = c.inventory_id " +
             "JOIN product p ON p.id = i.product_id " +
             "JOIN color cl ON cl.id = i.color_id " +
             "JOIN size s ON s.id = i.size_id " +
-            "WHERE u.id = :userId", nativeQuery = true)
+            "JOIN product_color pc ON pc.product_id = p.id " +
+            "JOIN file_product_img fpi ON fpi.product_color_id = pc.id " +
+            "WHERE u.id = :userId " +
+            "GROUP BY c.id, cl.color_name, s.size_name, p.name, p.price, c.quantity, i.id " +
+            "LIMIT 0, 1000", nativeQuery = true)
     List<Object[]> findCartDetailsByUserId(@Param("userId") Long userId);
 
 }

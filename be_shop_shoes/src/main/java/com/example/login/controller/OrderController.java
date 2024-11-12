@@ -1,5 +1,6 @@
 package com.example.login.controller;
 
+import com.example.login.dto.OrderDTO;
 import com.example.login.dto.OrderRequest;
 import com.example.login.model.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,18 @@ public class OrderController {
                     orderRequest.getCusPhone(),
                     orderRequest.getCusEmail(),
                     orderRequest.getOrderNote(),
+                    orderRequest.getUserId(),
                     orderRequest.getToTal()
             );
             return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Order> getOrdersByUserId(@PathVariable Long userId) {
+        return orderService.getOrdersByUserId(userId);
     }
 
 

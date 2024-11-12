@@ -9,9 +9,11 @@ public class CartDetailDTO {
     private Integer quantity;
     private Long inventoryId;
 
+    private String fileUrl;
+
     // Constructors
 
-    public CartDetailDTO(Long id, String colorName, String sizeName, String productName, Double price, Integer quantity, Long inventoryId) {
+    public CartDetailDTO(Long id, String colorName, String sizeName, String productName, Double price, Integer quantity, Long inventoryId, String fileUrl) {
         this.id = id;
         this.colorName = colorName;
         this.sizeName = sizeName;
@@ -19,6 +21,15 @@ public class CartDetailDTO {
         this.price = price;
         this.quantity = quantity;
         this.inventoryId = inventoryId;
+        this.fileUrl = fileUrl;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 
     public Long getInventoryId() {

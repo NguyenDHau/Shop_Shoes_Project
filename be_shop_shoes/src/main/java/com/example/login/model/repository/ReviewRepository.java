@@ -17,6 +17,17 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "JOIN product p ON p.id = r.product_id " +
             "WHERE p.id = :productId", nativeQuery = true)
     List<Object[]> findReviewsByProductId(@Param("productId") Long productId);
+
+    @Query(value = "SELECT p.id, ROUND(AVG(r.start)) AS avgRating, p.name AS productName, " +
+            "MIN(fpi.file_url) AS fileUrl, p.price, COUNT(r.id) AS countReview " +
+            "FROM review r " +
+            "JOIN product p ON p.id = r.product_id " +
+            "JOIN product_color pc ON pc.product_id = p.id " +
+            "JOIN file_product_img fpi ON fpi.product_color_id = pc.id " +
+            "GROUP BY p.id " +
+            "ORDER BY avgRating DESC " +
+            "LIMIT 6", nativeQuery = true)
+    List<Object[]> findTop4ProductsByRating();
 }
 
 

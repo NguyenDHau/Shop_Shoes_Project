@@ -10,9 +10,6 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<CartItem> items = new ArrayList<>();
 
     private String status;
 
@@ -26,11 +23,12 @@ public class Order {
     private String cusPhone;
     private String cusEmail;
     private String orderNote;
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Payment payment;
+    @Column(name = "userId")
+    private Long userId;
+
+    private Long paymentId;
     private Double toTal;
 
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 
     // Getters and Setters
 
@@ -122,11 +120,19 @@ public class Order {
         this.toTal = toTal;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public Long getPaymentId() {
+        return paymentId;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setPaymentId(Long paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

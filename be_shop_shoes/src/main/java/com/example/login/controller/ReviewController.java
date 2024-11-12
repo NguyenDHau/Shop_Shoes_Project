@@ -1,5 +1,6 @@
 package com.example.login.controller;
 
+import com.example.login.dto.ProductRatingDto;
 import com.example.login.model.entity.Review;
 import com.example.login.model.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,10 @@ public class ReviewController {
     public ResponseEntity<List<Map<String, Object>>> getReviewsByProductId(@PathVariable Long productId) {
         List<Map<String, Object>> reviews = reviewService.getReviewsByProductId(productId);
         return ResponseEntity.ok(reviews);
+    }
+
+    @GetMapping("/top-rated-products")
+    public List<ProductRatingDto> getTop4RatedProducts() {
+        return reviewService.getTop4ProductsByRating();
     }
 }
